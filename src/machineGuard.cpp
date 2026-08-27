@@ -8,31 +8,26 @@ void machineGuard_init() {
 }
 
 void machineGuard_loop() {
-    temperature_loop();
-    motion_loop();
+    alarm_system();
+
+  
 }
 
-void temperature_loop(){
-    float temperature = get_temperature();
 
-    if (temperature > 27.5) { 
+static void alarm_system() {
+    
+    if (check_motion() == true  && check_temperature() > TEMPERATURE_THRESHOLD) {
+        LED_on();
+        motor_on();
+    } else if (check_motion() == true  && check_temperature() <= TEMPERATURE_THRESHOLD) {
+        LED_on();
+        motor_off();
+    }else if (check_motion() == false && check_temperature() > TEMPERATURE_THRESHOLD) {
         LED_on();
         motor_on();
     } else {
         LED_off();
         motor_off();
     }
-}
-
-
-void motion_loop(){
-
-    bool motionState = check_motion();
-
-    if (motionState == true) {
-        LED_on();
-    } else {
-        LED_off();
-    }
-
+ 
 }

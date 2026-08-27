@@ -12,6 +12,6 @@
 
 
 void temperature_sensor_init();
-float get_temperature();
+float check_temperature();
 
 #endif // TEMPERATURE_SENSOR_H

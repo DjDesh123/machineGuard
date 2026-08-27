@@ -25,7 +25,7 @@ bool check_motion() {
     long duration = pulseIn(MOTION_SENSOR_ECHO_PIN, HIGH);
     float distance = duration * 0.034 / 2;
 
-    if (distance < 10) { 
+    if (distance < 5) { 
         return true;
     } else {
         return false; 

@@ -15,14 +15,16 @@ void machineGuard_loop() {
 
 
 static void alarm_system() {
+    float temperature = check_temperature();
+    bool motion = check_motion();
     
-    if (check_motion() == true  && check_temperature() > TEMPERATURE_THRESHOLD) {
+    if (motion == true  && temperature > TEMPERATURE_THRESHOLD) {
         LED_on();
         motor_on();
-    } else if (check_motion() == true  && check_temperature() <= TEMPERATURE_THRESHOLD) {
+    } else if (motion == true  && temperature <= TEMPERATURE_THRESHOLD) {
         LED_on();
         motor_off();
-    }else if (check_motion() == false && check_temperature() > TEMPERATURE_THRESHOLD) {
+    }else if (motion == false && temperature > TEMPERATURE_THRESHOLD) {
         LED_on();
         motor_on();
     } else {
